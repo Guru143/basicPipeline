@@ -2,6 +2,7 @@
 import { Construct } from 'constructs';
 import * as cdk from 'aws-cdk-lib';
 import { CodePipeline, CodePipelineSource, ShellStep } from 'aws-cdk-lib/pipelines';
+import { SecretValue } from 'aws-cdk-lib';
 
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
@@ -10,10 +11,10 @@ export class MyPipelineStack extends cdk.Stack {
     super(scope, id, props);
     
     
-    const pipeline = new CodePipeline(this, 'Pipeline', {
+    const basicPipeline = new CodePipeline(this, 'Pipeline', {
       pipelineName: 'MyPipeline',
       synth: new ShellStep('Synth', {
-        input: CodePipelineSource.gitHub('Guru143/basicPipeline', 'main'),
+        input: CodePipelineSource.gitHub('Guru143/basicPipeline', 'main',{authentication: SecretValue.secretsManager("GitHub-token")}),
         commands: ['npm ci', 'npm run build', 'npx cdk synth']
       })
     });
