@@ -5,6 +5,10 @@ import { MyPipelineStack } from '../lib/my-pipeline-stack';
 
 const app = new cdk.App();
 new MyPipelineStack(app, 'MyPipelineStack', {
+  env: {
+    account: '626713348596',
+    region: 'eu-central-1',
+  }
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
@@ -21,3 +25,5 @@ new MyPipelineStack(app, 'MyPipelineStack', {
 });
 
 app.synth();
+
+

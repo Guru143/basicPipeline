@@ -11,7 +11,7 @@ export class MyPipelineStack extends cdk.Stack {
     super(scope, id, props);
     
     
-    const basicPipeline = new CodePipeline(this, 'Pipeline', {
+    const pipeline = new CodePipeline(this, 'Pipeline', {
       pipelineName: 'MyPipeline',
       synth: new ShellStep('Synth', {
         input: CodePipelineSource.gitHub('Guru143/basicPipeline', 'main',{authentication: SecretValue.secretsManager("GitHub-token")}),
